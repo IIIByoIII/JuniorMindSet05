@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Fibonacci
 {
     [TestClass]
-    public class UnitTest1
+    public class FibonacciTests
     {
         [TestMethod]
         public void TestMethod1()
