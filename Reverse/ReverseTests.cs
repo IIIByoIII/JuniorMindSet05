@@ -7,8 +7,16 @@ namespace Reverse
     public class ReverseTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetBackwardsHello()
         {
+            Assert.AreEqual("olleH", Backwards("Hello"));
+        }
+
+        string Backwards(string text)
+        {
+            if (text.Length == 2)
+                return String.Concat(text[1].ToString(), text[0].ToString());
+            return String.Concat(Backwards(text.Substring(1)), text[0].ToString());
         }
     }
 }
