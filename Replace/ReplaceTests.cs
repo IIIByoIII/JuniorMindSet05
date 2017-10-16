@@ -23,12 +23,18 @@ namespace Replace
             Assert.AreEqual("Hello world, beautifull world!", ReplaceChar("Hello X, beautifull X!", 'X', "world")); 
         }
 
+        [TestMethod]
+        public void ReplaceO()
+        {
+            Assert.AreEqual("Invalid replacement string and character combination", ReplaceChar("Hello X, beautifull X!", 'o', "world")); 
+        }
+
         string ReplaceChar(string text, char c, string s)
         {
             string result1;
             string result2;
             if (s.IndexOf(c) >= 0)
-                return "Invalid replacement string";
+                return "Invalid replacement string and character combination";
             int indexC = text.IndexOf(c);
             if (indexC < 0)
                 return text;
