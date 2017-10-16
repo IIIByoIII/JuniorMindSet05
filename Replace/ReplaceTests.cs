@@ -16,5 +16,25 @@ namespace Replace
         {
             return text.Replace(c.ToString(), s);
         }
+
+        [TestMethod]
+        public void ReplaceX()
+        {
+            Assert.AreEqual("Hello world, beautifull world!", ReplaceChar("Hello X, beautifull X!", 'X', "world")); 
+        }
+
+        string ReplaceChar(string text, char c, string s)
+        {
+            string result1;
+            string result2;
+            if (s.IndexOf(c) >= 0)
+                return "Invalid replacement string";
+            int indexC = text.IndexOf(c);
+            if (indexC < 0)
+                return text;
+            result1 = String.Concat(text.Substring(0, indexC), s, text.Substring(indexC + 1));
+            result2 = ReplaceChar(result1, c, s);
+            return result2;
+        }
     }
 }
