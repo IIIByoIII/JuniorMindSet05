@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reverse", "Reverse\Reverse.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Replace", "Replace\Replace.csproj", "{2DCF3942-1E49-42D3-A77C-F7596CB2FF3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{E0837C72-B8D2-4A76-9599-C9C44401D8D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2DCF3942-1E49-42D3-A77C-F7596CB2FF3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DCF3942-1E49-42D3-A77C-F7596CB2FF3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DCF3942-1E49-42D3-A77C-F7596CB2FF3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0837C72-B8D2-4A76-9599-C9C44401D8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0837C72-B8D2-4A76-9599-C9C44401D8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0837C72-B8D2-4A76-9599-C9C44401D8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0837C72-B8D2-4A76-9599-C9C44401D8D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
