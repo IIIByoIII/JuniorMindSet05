@@ -25,5 +25,22 @@ namespace Calculator
             }
             return -1;
         }
+
+        [TestMethod]
+        public void IndexOfLastChar()
+        {
+            object[] formula = new object[] {2, '+', '*', 3};
+            Assert.AreEqual(2, LastCharIndex(formula));
+        }
+
+        int LastCharIndex(object[] f)
+        {
+            char charType = 'a';
+            for (int i = f.Length - 1; i >= 0; i--) {
+                if (f[i].GetType() == charType.GetType()) 
+                    return i;
+            }
+            return -1;
+        }
     }
 }
