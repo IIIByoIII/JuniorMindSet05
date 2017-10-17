@@ -15,8 +15,8 @@ namespace Reverse
         string Backwards(string text)
         {
             if (text.Length == 2)
-                return String.Concat(text[1].ToString(), text[0].ToString());
-            return String.Concat(Backwards(text.Substring(1)), text[0].ToString());
+                return text[1].ToString() + text[0].ToString();
+            return Backwards(text.Substring(1)) + text[0].ToString();
         }
     }
 }
