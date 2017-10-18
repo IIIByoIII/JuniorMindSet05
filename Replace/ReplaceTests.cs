@@ -31,11 +31,8 @@ namespace Replace
 
         string ReplaceChar(string text, char c, string s)
         {
-            if (text.Length == 1)
-                if (text[0] == c)
-                    return s;
-                else
-                    return text;
+            if (text.Length == 0)
+                return text;
             if (text[0] == c)
                 return s + ReplaceChar(text.Substring(1), c, s);
             return text[0].ToString() + ReplaceChar(text.Substring(1), c, s);
