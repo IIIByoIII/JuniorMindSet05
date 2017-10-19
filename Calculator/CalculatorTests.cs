@@ -46,15 +46,14 @@ namespace Calculator
 
         dynamic Calculate(object[] f)
         {
-            int intType = 1;
             int opIndex = LastCharIndex(f);
             var operation = Convert.ToChar(f[opIndex]);
             dynamic a, b, result;
-            if (f[opIndex + 1].GetType() == intType.GetType()) 
+            if (IsInt(f[opIndex + 1])) 
                 a = Convert.ToInt32(f[opIndex + 1]);
             else
                 a = Convert.ToDouble(f[opIndex + 1]);
-            if (f[opIndex + 2].GetType() == intType.GetType()) 
+            if (IsInt(f[opIndex + 2]))
                 b = Convert.ToInt32(f[opIndex + 2]);
             else
                 b = Convert.ToDouble(f[opIndex + 2]);
@@ -79,6 +78,12 @@ namespace Calculator
             if (f.Length == 1)
                 return result;
             return Calculate(f);
+        }
+
+        public bool IsInt(object element)
+        {
+            int intType = 1;
+            return element.GetType() == intType.GetType();
         }
     }
 }
