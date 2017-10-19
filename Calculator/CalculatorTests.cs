@@ -48,15 +48,21 @@ namespace Calculator
         {
             int opIndex = LastCharIndex(f);
             var operation = Convert.ToChar(f[opIndex]);
-            dynamic a, b, result;
-            if (IsInt(f[opIndex + 1])) 
-                a = Convert.ToInt32(f[opIndex + 1]);
-            else
-                a = Convert.ToDouble(f[opIndex + 1]);
-            if (IsInt(f[opIndex + 2]))
-                b = Convert.ToInt32(f[opIndex + 2]);
-            else
-                b = Convert.ToDouble(f[opIndex + 2]);
+            var a = f[opIndex + 1];
+            var b = f[opIndex + 2];
+            dynamic result = GetResult(operation, a, b);
+            for (int i = opIndex + 1; i < f.Length - 2; i++)
+                f[i] = f[i + 2];
+            Array.Resize(ref f, f.Length - 2);
+            f[opIndex] = result;
+            if (f.Length == 1)
+                return result;
+            return Calculate(f);
+        }
+
+        public dynamic GetResult(char operation, dynamic a, dynamic b)
+        {
+            dynamic result;
             switch (operation) {
                 case '-':
                     result = a - b;
@@ -71,13 +77,7 @@ namespace Calculator
                     result = a + b;
                     break;
             }
-            for (int i = opIndex + 1; i < f.Length - 2; i++)
-                f[i] = f[i + 2];
-            Array.Resize(ref f, f.Length - 2);
-            f[opIndex] = result;
-            if (f.Length == 1)
-                return result;
-            return Calculate(f);
+            return result;
         }
 
         public bool IsInt(object element)
