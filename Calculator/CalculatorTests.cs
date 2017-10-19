@@ -27,23 +27,37 @@ namespace Calculator
         public void PrefixedCalculation1()
         {
             object[] formula = new object[] { '*', 3, 4 };
-            Assert.AreEqual(12.0, Calculate(formula));
+            Assert.AreEqual(3 * 4, Calculate(formula));
         }
 
         [TestMethod]
         public void PrefixedCalculation2()
         {
             object[] formula = new object[] { '*', '+', 1, 1, 2 };
-            Assert.AreEqual(4.0, Calculate(formula));
+            Assert.AreEqual((1 + 1) * 2, Calculate(formula));
         }
 
-        double Calculate(object[] f)
+        [TestMethod]
+        public void PrefixedCalculation3()
         {
+            object[] formula = new object[] { '+', '/', '*', '+', 56, 45, 46, 3, '-', 1, 0.25 };
+            Assert.AreEqual(((56 + 45) * 46) / 3 + (1 - 0.25), Calculate(formula));
+        }
+
+        dynamic Calculate(object[] f)
+        {
+            int intType = 1;
             int opIndex = LastCharIndex(f);
             var operation = Convert.ToChar(f[opIndex]);
-            var a = Convert.ToDouble(f[opIndex + 1]);
-            var b = Convert.ToDouble(f[opIndex + 2]);
-            double result;
+            dynamic a, b, result;
+            if (f[opIndex + 1].GetType() == intType.GetType()) 
+                a = Convert.ToInt32(f[opIndex + 1]);
+            else
+                a = Convert.ToDouble(f[opIndex + 1]);
+            if (f[opIndex + 2].GetType() == intType.GetType()) 
+                b = Convert.ToInt32(f[opIndex + 2]);
+            else
+                b = Convert.ToDouble(f[opIndex + 2]);
             switch (operation) {
                 case '-':
                     result = a - b;
@@ -63,7 +77,7 @@ namespace Calculator
             Array.Resize(ref f, f.Length - 2);
             f[opIndex] = result;
             if (f.Length == 1)
-                return Convert.ToDouble(f[0]);
+                return result;
             return Calculate(f);
         }
     }
