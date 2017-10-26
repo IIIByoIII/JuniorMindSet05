@@ -7,83 +7,52 @@ namespace Calculator
     public class CalculatorTests
     {
         [TestMethod]
-        public void IndexOfLastChar()
-        {
-            object[] formula = new object[] { 2, '+', '*', 3 };
-            Assert.AreEqual(2, LastCharIndex(formula));
-        }
-
-        int LastCharIndex(object[] f)
-        {
-            char charType = 'a';
-            for (int i = f.Length - 1; i >= 0; i--) {
-                if (f[i].GetType() == charType.GetType()) 
-                    return i;
-            }
-            return -1;
-        }
-
-        [TestMethod]
         public void PrefixedCalculation1()
         {
-            object[] formula = new object[] { '*', 3, 4 };
-            Assert.AreEqual(3 * 4, Calculate(formula));
+            int pos = 0;
+            Assert.AreEqual(3.0 * 4.0, Calculate("* 3 4", ref pos));
         }
 
         [TestMethod]
         public void PrefixedCalculation2()
         {
-            object[] formula = new object[] { '*', '+', 1, 1, 2 };
-            Assert.AreEqual((1 + 1) * 2, Calculate(formula));
+            int pos = 0;
+            Assert.AreEqual((1.0 + 1.0) * 2.0, Calculate("* + 1 1 2", ref pos));
         }
 
         [TestMethod]
         public void PrefixedCalculation3()
         {
-            object[] formula = new object[] { '+', '/', '*', '+', 56, 45, 46, 3, '-', 1, 0.25 };
-            Assert.AreEqual(((56 + 45) * 46) / 3 + (1 - 0.25), Calculate(formula));
+            int pos = 0;
+            Assert.AreEqual(((56.0 + 45.0) * 46.0) / 3.0 + (1.0 - 0.25), Calculate("+ / * + 56 45 46 3 - 1 0.25", ref pos));
         }
 
-        dynamic Calculate(object[] f)
+        double Calculate(string formula, ref int pos)
         {
-            int opIndex = LastCharIndex(f);
-            var operation = Convert.ToChar(f[opIndex]);
-            var a = f[opIndex + 1];
-            var b = f[opIndex + 2];
-            dynamic result = GetResult(operation, a, b);
-            for (int i = opIndex + 1; i < f.Length - 2; i++)
-                f[i] = f[i + 2];
-            Array.Resize(ref f, f.Length - 2);
-            f[opIndex] = result;
-            if (f.Length == 1)
+            double result;
+            string[] elements = formula.Split(new char[] {' ', ','});
+            int i = pos;
+            if (double.TryParse(elements[pos], out result))
                 return result;
-            return Calculate(f);
-        }
-
-        public dynamic GetResult(char operation, dynamic a, dynamic b)
-        {
-            dynamic result;
-            switch (operation) {
-                case '-':
+            pos++;
+            double a = Calculate(formula, ref pos);
+            pos++;
+            double b = Calculate(formula, ref pos);
+            switch (elements[i]) {
+                case "+":                         
+                    result = a + b;
+                    break;
+                case "-":
                     result = a - b;
                     break;
-                case '*':
+                case "*":
                     result = a * b;
                     break;
-                case '/':
-                    result = a / b;
-                    break;
                 default:
-                    result = a + b;
+                    result = a / b;
                     break;
             }
             return result;
-        }
-
-        public bool IsInt(object element)
-        {
-            int intType = 1;
-            return element.GetType() == intType.GetType();
         }
     }
 }
