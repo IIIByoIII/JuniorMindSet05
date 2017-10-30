@@ -18,19 +18,27 @@ namespace Hanoi
             Assert.AreEqual("ab ac bc", HanoiMoves(2));
         }
 
+        [TestMethod]
+        public void Hanoi3()
+        {
+            Assert.AreEqual("ac ab cb ac ba bc ac", HanoiMoves(3));
+        }
+
         string HanoiMoves(int disks)
         {
-            string result = "ac";
-            int totalMoves = (int)Math.Pow(2, disks) - 1;
-            for (int i = 0; i < totalMoves - 1; i += 2) {
-                string[] moves = result.Split(new char[] {' '});
-                int pos = (i * 6) + 1;
-                if (moves[i].IndexOf('a') == -1)
-                    result = result.Substring(0, pos) + "a " + moves[i] + " a" + result.Substring(pos);
-                else if (moves[i].IndexOf('b') == -1)
-                    result = result.Substring(0, pos) + "b " + moves[i] + " b" + result.Substring(pos);
-                else 
-                    result = result.Substring(0, pos) + "c " + moves[i] + " c" + result.Substring(pos);
+            if (disks == 1)
+                return "ac";
+            string result;
+            result = HanoiMoves(disks - 1);
+            string move;
+            for (int i = 0; i < result.Length; i += 12) {
+                move = result.Substring(i, 2);
+                if (move.IndexOf('a') == -1)
+                    result = result.Substring(0, i + 1) + "a " + move + " a" + result.Substring(i + 1);
+                else if (move.IndexOf('b') == -1)
+                    result = result.Substring(0, i + 1) + "b " + move + " b" + result.Substring(i + 1);
+                else
+                    result = result.Substring(0, i + 1) + "c " + move + " c" + result.Substring(i + 1);
             }
             return result;
         }
