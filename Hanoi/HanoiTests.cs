@@ -24,6 +24,12 @@ namespace Hanoi
             Assert.AreEqual("ac ab cb ac ba bc ac", HanoiMoves(3));
         }
 
+        [TestMethod]
+        public void Hanoi4()
+        {
+            Assert.AreEqual("ab ac bc ab ca cb ab ac bc ba ca bc ab ac bc", HanoiMoves(4));
+        }
+
         string HanoiMoves(int disks)
         {
             if (disks == 1)
