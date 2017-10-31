@@ -52,14 +52,20 @@ namespace Hanoi
         [TestMethod]
         public void Hanoi4NrOfMoves()
         {
-            Assert.AreEqual(2 * 2 * 2 * 2 - 1, HanoiNumberOfMoves(4)); 
+            Assert.AreEqual((uint)2 * 2 * 2 * 2 - 1, HanoiNumberOfMoves(4)); 
         }
 
-        long HanoiNumberOfMoves(int disks)
+        [TestMethod]
+        public void Hanoi64NrOfMoves()
+        {
+            Assert.AreEqual((ulong)Math.Pow(2, 64) - 1, HanoiNumberOfMoves(64)); 
+        }
+
+        ulong HanoiNumberOfMoves(int disks)
         {
             if (disks > 30)
-                return (long)Math.Pow(2, disks) - 1;
-            long result = ((long)HanoiMoves(disks).Length + 1) / 3;
+                return (ulong)Math.Pow(2, disks) - 1;
+            ulong result = ((ulong)HanoiMoves(disks).Length + 1) / 3;
             return result;
         }
     }
