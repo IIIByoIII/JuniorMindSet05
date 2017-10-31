@@ -12,6 +12,12 @@ namespace PascalsTriangle
             Assert.AreEqual(2, Pascal(3, 2));
         }
 
+        [TestMethod]
+        public void PascalRow7Col4()
+        {
+            Assert.AreEqual(20, Pascal(7, 4));
+        }
+
         int Pascal(int row, int col)
         {
             if ((col == 1) || (col == row))
