@@ -28,7 +28,13 @@ namespace PascalsTriangle
         [TestMethod]
         public void Pascal3()
         {
-            CollectionAssert.AreEqual(new string[] { "1", "11", "121" }, PascalTriangle(3));
+            CollectionAssert.AreEqual(new string[] { "1 ", "1 1 ", "1 2 1 " }, PascalTriangle(3));
+        }
+
+        [TestMethod]
+        public void PascalRow7()
+        {
+            Assert.AreEqual("1 6 15 20 15 6 1 ", PascalTriangle(7)[6]);
         }
 
         string[] PascalTriangle(int level)
@@ -37,6 +43,7 @@ namespace PascalsTriangle
             for (int i = 0; i < level; i++) {
                 for (int j = 0; j <= i ; j++) {
                     result[i] += Pascal(i, j).ToString();
+                    result[i] += " ";
                 }
             }
             return result;
