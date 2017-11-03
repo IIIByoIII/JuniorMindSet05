@@ -28,23 +28,35 @@ namespace PascalsTriangle
         [TestMethod]
         public void Pascal3()
         {
-            CollectionAssert.AreEqual(new string[] { "1 ", "1 1 ", "1 2 1 " }, PascalTriangle(3));
+            CollectionAssert.AreEqual(new string[] { "1", "1 1", "1 2 1" }, PascalTriangle(3));
         }
 
         [TestMethod]
         public void PascalRow7()
         {
-            Assert.AreEqual("1 6 15 20 15 6 1 ", PascalTriangle(7)[6]);
+            Assert.AreEqual("1 6 15 20 15 6 1", PascalTriangle(7)[6]);
         }
 
         string[] PascalTriangle(int level)
         {
             string[] result = new string[level];
-            for (int i = 0; i < level; i++) {
-                for (int j = 0; j <= i ; j++) {
-                    result[i] += Pascal(i, j).ToString();
-                    result[i] += " ";
+            int pos;
+            string str;
+            result[0] = "1";
+            for (int i = 1; i < level; i++) {
+                result[i] = "1 1 ";
+                for (int j = 1; j < (i / 2) ; j++) {
+                    pos = result[i].Length / 2;
+                    str = Pascal(i, j).ToString() + " ";
+                    str += str;
+                    result[i] = result[i].Insert(pos, str);
                 }
+                if (i % 2 == 0) {
+                    pos = result[i].Length / 2;
+                    str = Pascal(i, i / 2).ToString() + " ";
+                    result[i] = result[i].Insert(pos, str);
+                }
+                result[i] = result[i].Remove(result[i].Length - 1);
             }
             return result;
         }
