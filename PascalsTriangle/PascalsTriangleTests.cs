@@ -60,5 +60,31 @@ namespace PascalsTriangle
             }
             return result;
         }
+
+        [TestMethod]
+        public void ArrayPascal3()
+        {
+            CollectionAssert.AreEqual(new int[] { 1 }, ArrayPascalTriangle(3)[0]);
+            CollectionAssert.AreEqual(new int[] { 1, 1 }, ArrayPascalTriangle(3)[1]);
+            CollectionAssert.AreEqual(new int[] { 1, 2 ,1 }, ArrayPascalTriangle(3)[2]);
+        }
+
+        [TestMethod]
+        public void ArrayPascalRow7()
+        {
+            CollectionAssert.AreEqual(new int[] { 1, 6, 15, 20, 15, 6, 1 }, ArrayPascalTriangle(7)[6]);
+        }
+
+        int[][] ArrayPascalTriangle(int level)
+        {
+            int[][] result = new int[level][];
+            for (int i = 0; i < level; i++) {
+                result[i] = new int[i + 1];
+                for (int j = 0; j <= i; j++) {
+                    result[i][j] = Pascal(i, j);
+                }
+            }
+            return result;
+        }
     }
 }
