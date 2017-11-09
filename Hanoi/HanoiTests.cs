@@ -30,23 +30,11 @@ namespace Hanoi
             Assert.AreEqual("ab ac bc ab ca cb ab ac bc ba ca bc ab ac bc", HanoiMoves(4));
         }
 
-        string HanoiMoves(int disks)
+        string HanoiMoves(int disks, char source = 'a', char aux = 'b', char dest = 'c')
         {
             if (disks == 1)
-                return "ac";
-            string result;
-            result = HanoiMoves(disks - 1);
-            string move;
-            for (int i = 0; i < result.Length; i += 12) {
-                move = result.Substring(i, 2);
-                if (move.IndexOf('a') == -1)
-                    result = result.Substring(0, i + 1) + "a " + move + " a" + result.Substring(i + 1);
-                else if (move.IndexOf('b') == -1)
-                    result = result.Substring(0, i + 1) + "b " + move + " b" + result.Substring(i + 1);
-                else
-                    result = result.Substring(0, i + 1) + "c " + move + " c" + result.Substring(i + 1);
-            }
-            return result;
+                return source.ToString() + dest.ToString();
+            return HanoiMoves(disks - 1, source, dest, aux) + " " + source.ToString() + dest.ToString() + " " + HanoiMoves(disks - 1, aux, source, dest);
         }
 
         [TestMethod]
